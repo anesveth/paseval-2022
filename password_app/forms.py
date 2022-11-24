@@ -18,7 +18,7 @@ class RandomGeneratorInput(forms.Form):
     use_numbers = forms.BooleanField(initial=True,required=False)
 
 class PersonalizedGeneratorInput(forms.Form):
-    word_or_phrase = forms.CharField(label="Words or phrases you will remember",min_length=3,max_length=40,initial='apple,cake')
+    word_or_phrase = forms.CharField(label="Words or phrases you will remember",min_length=3,max_length=40,initial='apple,cake',required=True)
     numbers = forms.CharField(label="Numbers ",max_length=40)
     special_e = forms.CharField(label="Special element (these will be taken as words) ",max_length=40)
     symbols = forms.CharField(label="Symbols ",max_length=21)

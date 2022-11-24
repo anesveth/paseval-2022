@@ -18,6 +18,7 @@ def evaluation(l:list,type:str):
     eval = True
     if type == 'number':
         for element in l:
+            print("number")
             try:
                 e = int(element)
                 print(e)
@@ -31,13 +32,12 @@ def evaluation(l:list,type:str):
             if element not in all_symbols:
                 print("False!")
                 print(element)
-                print("all_symbols")
-                print(all_symbols[0])
-                print(all_symbols)
                 eval = False
     
     elif type == 'words':
         for element in l:
+            element = element.replace(' ', '')
+            
             for i in element:
                 if (i not in letters):
                     print("False!")
@@ -68,8 +68,8 @@ def personalized_generator(word_or_phrase:str, numbers:str, special_e:str, symbo
         special_e = special_e.split(',')
 
     options = [word_or_phrase, numbers, special_e, symbols]
-
-    valid_n = evaluation(numbers,'numbers')
+    print(options)
+    valid_n = evaluation(numbers,'number')
     print(valid_n)
     valid_s = evaluation(symbols,'symbol')
     # print(valid_n)
@@ -80,12 +80,9 @@ def personalized_generator(word_or_phrase:str, numbers:str, special_e:str, symbo
     # print(options)
     if (valid_n and valid_s and valid_w and valid_e):
         while len(options) > 1:
-            # print(len(options))
             op_n = len(options)
             n = random.randrange(op_n)
-            # print(random.randrange(len(options)))
             if isinstance(options[n], list):
-                # print("options: = "+str(options[n]))
                 if len(options[n]) > 1:
                     op_n = len(options[n])
                     ni = random.randrange(op_n)
@@ -97,11 +94,9 @@ def personalized_generator(word_or_phrase:str, numbers:str, special_e:str, symbo
                 else:
                     ni = 0
                     final_password += options.pop(n)[0]
-                # print("options left: = "+str(options[n]))
             else:
                 final_password += options.pop(n)
-            # print(final_password)
- 
+
         try:
             final_password += options.pop()
         except:
