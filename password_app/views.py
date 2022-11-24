@@ -3,6 +3,7 @@ from ast import Pass
 from operator import is_
 import re
 from django.shortcuts import render,redirect
+from django.views.decorators.csrf import csrf_protect
 ## for the redirects of posts/gets
 from django.http import HttpResponseRedirect,HttpResponsePermanentRedirect
 from django.urls import reverse
@@ -43,6 +44,7 @@ def Home(request):
         request.session['generatedPassword'] = ''
     return render(request, "index.html", empty_forms)
 
+# @csrf_protect
 def viewStrength(request):
     context = {
         'password_input' : request.session['password_input'],
@@ -64,14 +66,14 @@ def viewStrength(request):
     # print("view")
     # print(request.session['score'])
     return render(request, 'strength.html', context)
-
+# @csrf_protect
 def viewRandom(request):
     context = {
         'random_form' : forms.RandomGeneratorInput(),
         'generated' : request.session['generatedPassword']
     }
     return render(request, 'randomg.html',context)
-
+# @csrf_protect
 def viewPersonalizedg(request):
     context = {
         'personalized_form' : forms.PersonalizedGeneratorInput(),
@@ -79,7 +81,7 @@ def viewPersonalizedg(request):
     }
     return render(request, 'personalized.html',context)
 
-
+# @csrf_protect
 def Strength(request):
     if request.method == 'POST':
         password_form = forms.passwordInput(request.POST)
@@ -121,7 +123,7 @@ def Strength(request):
     else:
         return redirect('index')
 
-
+# @csrf_protect
 def randomGeneration(request):
     if request.method == 'POST':
         # print("was here")  
@@ -145,7 +147,7 @@ def randomGeneration(request):
     else:
         return redirect('index')
 
-
+# @csrf_protect
 def personalizedGeneration(request):
     if request.method == 'POST': 
         # print("was here")  

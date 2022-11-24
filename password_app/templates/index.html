@@ -60,7 +60,7 @@
         <form action="/test-strength" method="post" class="php-email-form">
           <div class="subscribe-form" style="width:640px; height:50px">
               <!-- necessary for security reasons of django for input forms -->
-              {% csrf_token %}
+              <!-- {% csrf_token %} -->
               <!-- form for password testing -->
               {{ strength_tester.password_input }}
             <button id='password_submit' type="submit" value="submit">Test strength!</button>
