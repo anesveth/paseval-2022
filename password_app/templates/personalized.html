@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PASEVAL</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static '/img/favicon.ico' %}" rel="icon">
+  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Maundy - v4.8.0
+  * Template URL: https://bootstrapmade.com/maundy-free-coming-soon-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+    #id_password_input {
+      width: 485px; 
+      height: -webkit-fill-available;
+    }
+    #main button{
+    top: 0;
+    right: -2px;
+    bottom: 0;
+    border: 0;
+    background: none;
+    text-align: center;
+    font-size: 20px;
+    padding: 15px 30px;
+    background: #10206d;
+    color: #fff;
+    transition: 0.3s;
+    border-radius: 50px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  }
+  #main button:hover {
+  background: #22ae9c;
+  
+  }
+  #main #link{
+    color: #24b7a4;
+    text-decoration: none;
+    background: none;
+    background-color: transparent;
+    font-size: 16px;
+    box-shadow: none;
+  }
+
+  #main #link:hover {
+    color: #36d8c3;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center" style="padding: 70px 0 20px 0;">
+    <div class="container d-flex flex-column align-items-center">
+      <h1>PASEVAL</h1>
+      <!-- <h1 style="font-size: 30px;
+      font-weight: 600;">Password Strentgh tester and Generator</h1> -->
+      <h2>Test the strength of a password or generate a new one!</h2>
+    </div>
+  </header><!-- End #header -->
+
+  <main id="main" class="d-flex align-items-center" >
+    <div class="container d-flex flex-column align-items-center" >
+      {% if generated|length > 1 %}
+      <div class="section-title" style="text-align:center; background-color:#0d5b4c; border-radius: 20px; padding: 10px; padding-top: 20px; text-shadow: 4px 6px 9px rgba(0,0,0,1);">
+        <p>Your password has been generated!</p>
+        <h1 style="text-shadow: 4px 6px 26px rgba(0,0,0,0.79);">{{ generated }}</h1>
+      </div>
+      <p style="margin-top:20px;">you can also replace letters with symbols to not have full words!</p>
+      {% endif %}
+      <hr>
+      <div class="section-title" style="margin-top: -10px;" >
+        <h2 style="text-shadow: 4px 6px 26px rgba(0,0,0,0.79);">Password Generator</h2>
+        <p style="text-shadow: 4px 6px 9px rgba(0,0,0,1);">Create a password personalized for you!</p>
+        <p>By making a password out of your own preferences and creativity, it will be easier to remember while still being capable of being strong</p>
+
+        <br>
+        
+      </div>
+      <hr>
+      <div class="subscribe" style="text-align:center; background-color:#103e6d; border-radius: 5px; padding: 10px">
+        <h3><b>HOW TO MAKE YOUR PASSWORD: fill out the form following these guidelines</b> </h3>
+        <ul style="text-align: left;">
+          <li>Come up with a word you remember. Longer words are best, and phrases are even better. The word may be a dog or cat you had years ago, or even a street you lived on</li>
+          <li>Pick a number you can remember, such as the year you graduated high school.</li>
+          <li>Add a unique element to the password</li>
+          <li>Pick a symbol you will remember</li>            
+        </ul>
+        
+        <h4><b>If you want to include several numbers, words, phrases, etc. separate them by comma</b> </h4>
+
+        <form action="/generate-personalized" method="post" >
+          {% csrf_token %}
+
+          <div class="">
+             <br>
+            <!-- necessary for security reasons of django for input forms -->
+            {{ personalized_form.as_p }}
+            {{ random_form.as_p }}
+             <!-- form for password testing -->
+             
+          </div>
+            <br>
+         <button id='get_personalized_p' type="submit" value="submit">GENERATE!</button>
+
+        </form>
+        <br>
+        <a id="link" href="https://appliedinteractive.com/blog/2015/09/15/how-to-choose-a-better-password-using-an-easy-algorithm/">This original algorithm and advice was sourced from this website</a>
+
+      </div>
+      <br>
+      <br>
+      
+        
+      
+     
+      
+    </div>
+
+      
+      <br>
+    </div>
+    </main>
+    <div class="section-title">
+      <h2><a href="/"><button class="go-back" style="font-size:18px;">GO HOME</button></a></h2>
+    </div>
+
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        App made by Anesveth Maatens, David Corzo, Ian Jenatz (2022)
+      </div>
+      <br>
+      <div class="copyright">
+        &copy; Copyright of original design <strong><span>Maundy</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/maundy-free-coming-soon-bootstrap-theme/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End #footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static '/js/main.js'%}"></script>
+
+  <!-- <script type="text/javascript">
+    document.getElementById("password_submit").onclick = function () {
+        location.href = "/test-strength";
+    };
+</script> -->
+
+</body>
+
+</html>

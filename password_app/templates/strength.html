@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Strentgh</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static '/img/favicon.ico' %}" rel="icon">
+  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: Maundy - v4.8.0
+  * Template URL: https://bootstrapmade.com/maundy-free-coming-soon-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+  table {
+    border-collapse: collapse;
+    width: 70%;
+  }
+
+  td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  tr:nth-child(even){background-color: #10566d;}
+
+  tr:hover {background-color: #103e6d;}
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #10206d;
+    color: white;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center" style=" padding-bottom: 0px;">
+    <div class="container d-flex flex-column align-items-center" style="text-align: center;">
+        <h3 >Currently testing the password:</h3>
+          <h3 style="font-size:25px;">{{ password_input }}</h3>
+        <br>
+    </div>
+    <section id="contact" class="contact" style="padding-top: 5px;">
+      <div class="section-title" style="text-shadow: 4px 6px 9px rgba(0,0,0,1);">
+        <h3 style="color:white;">Overall score:</h3>
+        {% if score == 'Change it as soon as possible!' %}
+          <h2 style="color:hsl(11deg 100% 42%); font-size: 48px;">{{ score }}</h2>
+        {% elif score == 'Unsafe' %}
+          <h2 style="color:hsl(30deg 100% 52%); font-size: 48px;">{{ score }}</h2>
+        {% elif score == 'Safe enough' %}
+        <h2 style="color:rgb(75, 205, 205); font-size: 48px;">{{ score }}</h2>
+        {% elif score == 'Very safe' %}
+        <h2 style="color:#24ae97;; font-size: 48px;">{{ score }}</h2>
+        {% elif score == 'Safest' %}
+        <h2 style="color:hsl(147deg 51% 52%); font-size: 48px;">{{ score }}</h2>
+        {% endif %}
+      </div>
+        <div class="container" style="text-shadow: 4px 6px 26px rgba(0,0,0,0.79);">
+          <div class="section-title" style="margin-bottom:0px;">
+            <h2>Has it been previously Pwned?</h2>
+            {% if pwned.0 %}
+              <p style="text-shadow: 4px 6px 9px rgba(0,0,0,1);">Oh no! This password has been pwned at least  <b style="font-size:20px;">{{ pwned.1 }}</b>  time(s).</p>
+              <p style="text-shadow: 4px 6px 9px rgba(0,0,0,1);">This means that it is very vulnerable to someone using brute force against it</p>
+            {% else %}
+              <p style="text-shadow: 4px 6px 9px rgba(0,0,0,1);">Never! or at least according to the 'HaveIbeenPwned?' database, it hasn't been pwned yet</p>
+            {% endif %}
+          </div>
+          <br>
+          <br>
+          <br>
+          <div class="section-title">
+            <h2>Strength level:</h2>
+          </div>
+          <div style="padding-left: 40px; margin-top:-20px; text-shadow: 4px 6px 9px rgba(0,0,0,1);">
+            <div style="margin-left: -40px; text-align: center;">
+            <p>How strong is your password on constitution alone? Let's see: </p>
+            <h3 style="font-size:21px;">Level of strength: {{ level }}</h3>
+            </div>
+            <div style="background-color:#103e6d; border-radius: 5px; padding: 2px;">
+            <p> <b>Amount of english words found: </b> {{ words.1 }}</p>
+            {% if not words.0 %}
+            <p>Wow! You have no english words in your password, this can make it stronger</p>
+            {% endif %}
+            <p>Consider not using too many words with correct spelling, as these can make a password vulnerable to brute force attacks using a dictionary</p>
+            <p>We'd recommend comming up with a different and creative way to spell these words using numbers or special chars</p>
+            </div>
+            <p> <b>Distribution of types of characters in password: </b></p>
+            <table class="table table-striped">
+              <tr>
+                <th scope="col">type of char</th>
+                <th scope="col">total found</th>
+                <th scope="col">% in relation to entire password</th>
+              </tr>
+              {% for key,values in distribution.items %}
+              <tr>
+                <td scope="row">{{key}}</td>
+                <td>{{values.0}}</td>
+                <td>{{values.1}}</td>
+              </tr>
+              {% endfor %}
+
+            </table>
+
+            <p><b>Main concerns:</b> </p>
+            <ul>
+            {% for f in flags %}
+              {% if f|length > 1 %}
+                <li>{{ f.1 }} -> " <b style="font-size: 20px;"><i>{{ f.0 }}</i></b> "</li>
+              {% else %}
+                <li>{{ f.0 }}</li>
+              {% endif %}
+            {% endfor %}
+            </ul>
+          </div>
+          
+        </div>
+        
+      </section>
+      <div class="section-title">
+        <h2><a href="/"><button class="go-back" style="font-size:18px;">Try another password</button></a></h2>
+      </div>
+  </header>
+
+<!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        App made by Anesveth Maatens, David Corzo, Ian Jenatz (2022)
+      </div>
+      <br>
+      <div class="copyright">
+        &copy; Copyright of original design <strong><span>Maundy</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/maundy-free-coming-soon-bootstrap-theme/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End #footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static '/vendor/php-email-form/validate.js'%}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static '/js/main.js'%}"></script>
+
+
+</body>
+
+</html>
